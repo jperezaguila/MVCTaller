@@ -1,0 +1,77 @@
+﻿@model IEnumerable<MVCTaller.Models.Vehiculos>
+@{
+    ViewBag.Title = "Index";
+}
+<div id="listado">
+    @Html.Partial("_listadoVehiculos", Model)
+</div>
+
+<div>
+    <input type="text" id="txtMar" placeholder="Marca" />
+    <br />
+    <input type="text" id="txtMod" placeholder="Modelo" />
+    <br />
+    <input type="text" id="txtMat" placeholder="Matricula" />
+    <br />
+    <input type="text" id="txtPcost" placeholder="Coste" />
+    <br />
+    <input type="text" id="txtIdt" placeholder="Tipo" />
+
+</div>
+<h2>Vehiculos</h2>
+@section ZonaJavaScript
+{
+    <script>
+        function alta() {
+            var data = {
+                marca: $("txtMar").val(),
+                modelo: $("txtMod").val(),
+                matricula: $("txtMat").val(),
+                pcoste: $("txtPcost").val(),
+                idtipo: $("txtIdt").val()
+
+            };
+            var url = "@Url.Action("Alta")";
+            $.ajax({
+                url: url,
+                data: JSON.stringify(data),
+                type: "POST",
+                headers: { "Content-Type": "application/json" },
+                datatype: "json",
+                success: function(res) {
+                    if (res.idvehiculo > 0)
+                    {
+                        listado();
+                    alert("Guardado...");
+                    }
+                else {
+                alert("No Guardado...");
+
+                    }
+
+        }
+        });
+
+        }
+
+        function listado() {
+            var url = "@Url.Action("Buscar")";
+
+
+        }
+
+
+    </script>
+}
+
+
+
+
+
+@Html.ActionLink("Alta", "Alta")
+
+
+
+@*@Html.ActionLink("Listar", "Listar")*@
+@*@Html.ActionLink("Buscar", "Buscar")*@
+

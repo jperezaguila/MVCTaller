@@ -1,0 +1,10 @@
+﻿@model MVCTaller.Models.Tipo
+
+@{
+    ViewBag.Title = "Detalle";
+}
+
+<h3>Detalles de @Html.DisplayFor(o => o.nombre) </h3>
+@*<h3>@Model.descripcion</h3>*@
+<h3>@Html.DisplayFor(o => o.descripcion)</h3>
+@Html.ActionLink("Volver","Index")

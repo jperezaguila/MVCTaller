@@ -1,0 +1,23 @@
+﻿@model IEnumerable<MVCTaller.Models.Tipo>
+
+
+@{
+    ViewBag.Title = "Index";
+ }
+
+<h3>Listado de Vehiculos</h3>
+
+@foreach (var item in Model)
+{
+<div class="cl-md-4">
+    <h3>
+        @Html.DisplayNameFor(o => o.nombre)
+        @Html.DisplayFor(o => item.nombre)<br />
+    </h3> 
+        @*@Html.DisplayNameFor(o=>o.descripcion)
+            @Html.DisplayFor(o=>item.descripcion)*@
+        @Html.ActionLink("Ver", "Detalle", new { nombre = item.nombre.Replace(" ", "_") })
+
+</div><br/>
+}
+@Html.ActionLink("Nuevo", "Alta")                  

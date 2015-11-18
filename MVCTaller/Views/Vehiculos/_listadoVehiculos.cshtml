@@ -1,0 +1,44 @@
+﻿@model IEnumerable<MVCTaller.Models.Vehiculos>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.marca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.matricula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pcoste)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tipo.nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.marca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.modelo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.matricula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pcoste)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tipo.nombre)
+        </td>
+      </tr>
+}
+
+</table>
