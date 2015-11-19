@@ -1,77 +1,102 @@
 ﻿@model IEnumerable<MVCTaller.Models.Vehiculos>
+
 @{
-    ViewBag.Title = "Index";
-}
-<div id="listado">
-    @Html.Partial("_listadoVehiculos", Model)
-</div>
+    ViewBag.Title = "title";
+  }
 
 <div>
-    <input type="text" id="txtMar" placeholder="Marca" />
-    <br />
-    <input type="text" id="txtMod" placeholder="Modelo" />
-    <br />
-    <input type="text" id="txtMat" placeholder="Matricula" />
-    <br />
-    <input type="text" id="txtPcost" placeholder="Coste" />
-    <br />
-    <input type="text" id="txtIdt" placeholder="Tipo" />
-
+    <input type="text" id="txtBus" placeholder="Expresion de Busqueda"/>
+    <select id="ddlTipoBusqueda">
+        <option value="1" selected="selected">Matricula</option>
+        <option value="2">Marca</option>
+    </select>
+    <button type="button" id="btnBus" class="btn btn-default"><i class="glyphicon glyphicon-search"></i> Buscar</button>
 </div>
-<h2>Vehiculos</h2>
-@section ZonaJavaScript
+
+@*Incrustacion del modal de BootStrap.com/JavaScript*@
+   @* http://getbootstrap.com/javascript/#modals*@
+
+<div class="modal fade" id="dlgAlta">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Nuevo Vehículo</h4>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="txtMar" placeholder="Marca"/><input/>
+                <input type="text" id="txtMat" placeholder="Matricula"/><input/>
+                <input type="text" id="txtMod" placeholder="Modelo"/><input/>
+                <input type="text" id="txtPcost" placeholder="Precio de Coste"/><input />
+                </div>
+            <div class="modal-footer">
+                <button type="button" id="btnClose" class="btn btn-default" data-dismiss="modal">Cerra</button>
+                <button type="button" id="btnGuardar" class="btn btn-primary">Guardar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<div id="Contenido">
+    @Html.Partial("_ListadoVehiculoLuis", Model)
+</div>
+<button type="button" id="btnAdd" class="btn btn-default"><i class ="glyphicon glyphicon-plus-sign"></i>Nuevo</button>
+@*<input type="hidden" value="@ViewBag.idTipo" id="idTipo"/>*@
+@section JS
 {
     <script>
-        function alta() {
-            var data = {
-                marca: $("txtMar").val(),
-                modelo: $("txtMod").val(),
-                matricula: $("txtMat").val(),
-                pcoste: $("txtPcost").val(),
-                idtipo: $("txtIdt").val()
+        //la defino con el resultado del ViewBag
+        var tipo=@ViewBag.idTipo;
 
+        function Buscar() {
+            var txt = $("#txtBus").val();
+            var buscando = $("#ddlTipoBusqueda").val();
+
+            var url = "@Url.Action("Buscar")" + "?idTipo=" + tipo + "&campo=" + buscando + "&contenido=" + txt;
+            $("#contenido").load(encodeURI(url));
+
+        }
+
+        function Alta() {
+            var obj = {
+                marca: $("#txtMar").val(),
+                modelo: $("#txtMod").val(),
+                matricula: $("#txtMat").val(),
+                pcoste: $("#txtPcost").val(),
+                idtipo: tipo
             };
+            //el objeto se pasa a texto con Stringify
+            var objTxt = JSON.stringify(obj);
             var url = "@Url.Action("Alta")";
             $.ajax({
                 url: url,
-                data: JSON.stringify(data),
-                type: "POST",
-                headers: { "Content-Type": "application/json" },
+                data: objTxt,
                 datatype: "json",
+                //headers es fundamental
+                headers: { "Content-Type": "application/json" },
+                type: "POST",
+
                 success: function(res) {
-                    if (res.idvehiculo > 0)
-                    {
-                        listado();
-                    alert("Guardado...");
+                    $("#dlgAlta").modal("hide");
+                    if (res.idvehiculo != 0) {
+                        $("#txtBus").val("");
+                        Buscar();
+                    } else {
+                        alert("Error...");
                     }
-                else {
-                alert("No Guardado...");
+                }
 
-                    }
+            });
+           
+
 
         }
+        $("#txtBus").click(Buscar);
+        $("#txtGuardar").click(Alta);
+        $("#btnAdd").click(function() {
+        $("#dlgAlta").modal("toggle");
         });
-
-        }
-
-        function listado() {
-            var url = "@Url.Action("Buscar")";
-
-
-        }
-
-
     </script>
 }
-
-
-
-
-
-@Html.ActionLink("Alta", "Alta")
-
-
-
-@*@Html.ActionLink("Listar", "Listar")*@
-@*@Html.ActionLink("Buscar", "Buscar")*@
-

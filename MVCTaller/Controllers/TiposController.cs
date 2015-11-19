@@ -13,6 +13,7 @@ namespace MVCTaller.Controllers
         // GET: Tipos
         public ActionResult Index()
         {
+            // Codigo Luis: return View(db.Tipo.ToList());
             var data = db.Tipo;
             return View(data);
         }
@@ -33,12 +34,14 @@ namespace MVCTaller.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Alta(Tipo model)
         {
             if (ModelState.IsValid)
             {
                 db.Tipo.Add(model);
                 db.SaveChanges();
+                // codigo Luis: return RedirectToAction("Index");
                 return View(new Tipo());
             }
             return View(model);

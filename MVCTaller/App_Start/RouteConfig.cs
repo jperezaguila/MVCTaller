@@ -11,12 +11,26 @@ namespace MVCTaller
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            //routes.MapRoute(
+            //    name: "BuscarVehiculo",
+            //    url: "Vehiculo/Buscar/{idTipo}/{campo}/{contenido}",
+            //    defaults: new
+            //    {
+
+            //    }
+
+            //    );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+
+
+                
             );
         }
     }
