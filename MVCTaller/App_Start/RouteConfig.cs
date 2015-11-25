@@ -13,7 +13,7 @@ namespace MVCTaller
         {
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+ 
             //routes.MapRoute(
             //    name: "BuscarVehiculo",
             //    url: "Vehiculo/Buscar/{idTipo}/{campo}/{contenido}",
