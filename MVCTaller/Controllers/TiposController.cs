@@ -7,12 +7,17 @@ using MVCTaller.Models;
 
 namespace MVCTaller.Controllers
 {
+    [Authorize]
     public class TiposController : Controller
     {
-        private taller02Entities db = new taller02Entities();
+
+       
+        private taller01Entities db = new taller01Entities();
         // GET: Tipos
         public ActionResult Index()
         {
+            
+
             // Codigo Luis: return View(db.Tipo.ToList());
             var data = db.Tipo;
             return View(data);

@@ -13,10 +13,10 @@ namespace MVCTaller.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class taller02Entities : DbContext
+    public partial class taller01Entities : DbContext
     {
-        public taller02Entities()
-            : base("name=taller02Entities")
+        public taller01Entities()
+            : base("name=taller01Entities")
         {
         }
     
@@ -25,7 +25,11 @@ namespace MVCTaller.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Menu> Menu { get; set; }
+        public virtual DbSet<Rol> Rol { get; set; }
+        public virtual DbSet<RolesMenu> RolesMenu { get; set; }
         public virtual DbSet<Tipo> Tipo { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Vehiculos> Vehiculos { get; set; }
     }
 }

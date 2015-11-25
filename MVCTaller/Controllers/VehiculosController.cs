@@ -7,9 +7,10 @@ using MVCTaller.Models;
 
 namespace MVCTaller.Controllers
 {
+    [Authorize]
     public class VehiculosController : Controller
     {
-        taller02Entities db = new taller02Entities();
+        taller01Entities db = new taller01Entities();
 
         //Codigo Luis
         public ActionResult Index(int id)

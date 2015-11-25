@@ -17,7 +17,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("Base de Datos de Vehiculos", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+            @Html.ActionLink("Base de Datos de Vehiculos", "Index", "Login", new {area = ""}, new {@class = "navbar-brand"})
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -27,6 +27,11 @@
 </div>
 
 <div class="container body-content">
+    @if (Session ["horaLogin"]!=null)
+    {
+        var d = (DateTime)Session["horaLogin"];
+        @String.Format("{0:t}",d)
+    }
     @RenderBody()
     <hr/>
     <footer>

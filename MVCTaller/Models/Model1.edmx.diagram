@@ -4,10 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e6b69017c98f42699d214b888449a78f" Name="Diagram1">
-        <EntityTypeShape EntityType="taller02Model.Tipo" Width="1.5" PointX="4.375" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="taller02Model.Vehiculos" Width="1.5" PointX="2.125" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="taller02Model.FK_Vehiculos_Tipo" ManuallyRouted="false" />
+      <Diagram DiagramId="20bc30bdf64f4f74ba729512084cf61e" Name="Diagram1">
+        <EntityTypeShape EntityType="taller01Model.Menu" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="taller01Model.Rol" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="taller01Model.RolesMenu" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="taller01Model.Tipo" Width="1.5" PointX="4.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="taller01Model.Usuario" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="taller01Model.Vehiculos" Width="1.5" PointX="6" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="taller01Model.FK_RolesMenu_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="taller01Model.FK_RolesMenu_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="taller01Model.FK_Usuario_Rol" ManuallyRouted="false" />
+        <AssociationConnector Association="taller01Model.FK_Vehiculos_Tipo" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
